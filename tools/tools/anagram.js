@@ -1,88 +1,87 @@
 /* anagram.js */
 
-function permutations(arr) {
-  if (arr.length <= 1) return [arr.slice()];
-  const result = new Map();
-  for (let i = 0; i < arr.length; i++) {
-    const el = arr[i];
-    const rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
+function permutations(str) {
+  if (str.length <= 1) return [str];
+  const result = new Set();
+  for (let i = 0; i < str.length; i++) {
+    const rest = str.slice(0, i) + str.slice(i + 1);
     for (const p of permutations(rest)) {
-      const combo = [el, ...p];
-      const key = combo.join('');
-      if (!result.has(key)) result.set(key, combo);
+      result.add(str[i] + p);
     }
   }
-  return Array.from(result.values());
+  return [...result];
 }
 
 async function runAnagram() {
-  const text    = document.getElementById('anagram-text').value.toLowerCase().trim();
-  const pattern = document.getElementById('anagram-pattern').value.toLowerCase().trim();
+  const text    = document.getElementById('anagram-text').value.trim().toLowerCase().replace(/[^a-z]/g, '');
+  const pattern = document.getElementById('anagram-pattern').value.trim().toLowerCase().replace(/[^a-z]/g, '');
   const mode    = document.getElementById('anagram-mode').value;
 
   if (!text || !pattern) { showToast('Enter both text and pattern'); return; }
   if (text.length !== pattern.length) { showToast('Text and pattern must be same length'); return; }
 
-  showProgress('anagram-progress', 0, 'Loading dictionary…');
-  const dict    = await loadDictionary();
-  const results = [];
+  showProgress('anagram-progress', 0, 'Working…');
+  await yield_();
+
+  let html = '';
 
   if (mode === 'pre') {
+    // Group letters by pattern key
     const groups = {};
     for (let i = 0; i < pattern.length; i++) {
       const k = pattern[i];
-      if (!groups[k]) groups[k] = [];
-      groups[k].push(text[i]);
+      if (!groups[k]) groups[k] = '';
+      groups[k] += text[i];
     }
     const groupKeys  = Object.keys(groups).sort();
     const groupPerms = groupKeys.map(k => permutations(groups[k]));
 
-    function* combineGroups(perms, idx = 0, current = []) {
-      if (idx === perms.length) { yield current; return; }
-      for (const p of perms[idx]) yield* combineGroups(perms, idx + 1, [...current, p]);
+    // Combine all group permutations and reassemble into full strings
+    const results = new Set();
+
+    function combine(idx, chosen) {
+      if (idx === groupKeys.length) {
+        const pos = {};
+        groupKeys.forEach((k, i) => pos[k] = chosen[i].split(''));
+        let word = '';
+        for (const pk of pattern) word += pos[pk].shift();
+        results.add(word);
+        return;
+      }
+      for (const p of groupPerms[idx]) combine(idx + 1, [...chosen, p]);
     }
 
-    let count = 0;
-    const total = groupPerms.reduce((a, p) => a * p.length, 1);
-    for (const combo of combineGroups(groupPerms)) {
-      const pos = {};
-      groupKeys.forEach((k, i) => pos[k] = [...combo[i]]);
-      let word = '';
-      for (const pk of pattern) word += pos[pk].shift();
-      if (dict.has(word)) results.push(word);
-      count++;
-      if (count % 300 === 0) { showProgress('anagram-progress', Math.min(99, Math.round((count / total) * 100))); await yield_(); }
-    }
+    combine(0, []);
+
+    const sorted = [...results].sort();
+    html += `<b style="color:#2c3e50">${sorted.length} possibility(s)</b><br><br>`;
+    html += sorted.map(w => `<div class="result-item"><span class="plain-val">${escapeHTML(w)}</span></div>`).join('');
 
   } else {
-    const wordGroups = {};
-    for (let i = 0; i < pattern.length; i++) {
-      const k = pattern[i];
-      if (!wordGroups[k]) wordGroups[k] = [];
-      wordGroups[k].push(text[i]);
+    // Post-anagram: get word lengths from pattern, then permute all letters and split
+    const lengths = [];
+    let cur = pattern[0], len = 1;
+    for (let i = 1; i < pattern.length; i++) {
+      if (pattern[i] === cur) { len++; }
+      else { lengths.push(len); cur = pattern[i]; len = 1; }
     }
-    const groupKeys  = [...new Set(pattern.split(''))];
-    const groupPerms = groupKeys.map(k => permutations(wordGroups[k]).map(p => p.join('')));
+    lengths.push(len);
 
-    function* combinePost(perms, idx = 0, current = []) {
-      if (idx === perms.length) { yield current; return; }
-      for (const p of perms[idx]) yield* combinePost(perms, idx + 1, [...current, p]);
+    const allPerms = permutations(text);
+    const results  = new Set();
+
+    for (const p of allPerms) {
+      const words = [];
+      let pos = 0;
+      for (const l of lengths) { words.push(p.slice(pos, pos + l)); pos += l; }
+      results.add(words.join(' '));
     }
 
-    let count = 0;
-    const total = groupPerms.reduce((a, p) => a * p.length, 1);
-    for (const combo of combinePost(groupPerms)) {
-      if (combo.every(w => dict.has(w))) results.push(combo.join(' '));
-      count++;
-      if (count % 300 === 0) { showProgress('anagram-progress', Math.min(99, Math.round((count / total) * 100))); await yield_(); }
-    }
+    const sorted = [...results].sort();
+    html += `<b style="color:#2c3e50">Word lengths: ${lengths.join(' + ')} — ${sorted.length} possibility(s)</b><br><br>`;
+    html += sorted.map(w => `<div class="result-item"><span class="plain-val">${escapeHTML(w)}</span></div>`).join('');
   }
 
   hideProgress('anagram-progress');
-
-  const unique = [...new Set(results)];
-  let html = `<b style="color:#2c3e50">${unique.length} solution(s) found</b><br><br>`;
-  if (!unique.length) html += '<span class="result-no-match">No valid words found.</span>';
-  else html += unique.map(w => `<div class="result-item"><span class="plain-val">${escapeHTML(w)}</span></div>`).join('');
   showOutput('anagram-out', 'anagram-out-content', html);
 }
