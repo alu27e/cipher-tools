@@ -131,7 +131,7 @@ async function loadDictionary() {
   const badge = document.getElementById('dict-badge');
 
   try {
-    const res = await fetch('https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt');
+    const res = await fetch('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt');
     if (!res.ok) throw new Error();
     const text = await res.text();
     _dictionary = new Set(
