@@ -76,11 +76,7 @@ async function runAnagram() {
 
       function combine(idx, chosen) {
         if (idx === groupKeys.length) {
-          const pos = {};
-          groupKeys.forEach((k, i) => pos[k] = chosen[i].split(''));
-          let word = '';
-          for (const pk of pattern) word += pos[pk].shift();
-          results.add(word);
+          results.add(chosen.join(''));
           return;
         }
         for (const w of groupMatches[groupKeys[idx]]) combine(idx + 1, [...chosen, w]);
