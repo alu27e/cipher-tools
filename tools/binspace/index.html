@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="ct-base" content="../">
-  <title>Spaceless Binary — Ciphertool</title>
+  <title>Spaceless Binary Ciphertool</title>
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .bin-tab-bar {
@@ -26,7 +26,7 @@
     .bin-tab-btn:hover { border-color: #3498db; color: #3498db; }
     .bin-tab-btn.active { background: #3498db; color: white; border-color: #3498db; }
 
-    /* Interactive choice */
+    /*Interactive choice*/
     #binchoice-area { margin-top: 24px; }
     .binchoice-current {
       font-family: monospace;
@@ -100,10 +100,10 @@
     <button class="bin-tab-btn" id="bintab-choice" onclick="switchBinTab('choice')">Interactive Binary</button>
   </div>
 
-  <!-- ── All Modes ── -->
+  <!--All Modes-->
   <div id="tab-spaceless">
     <div class="instructions">
-      Paste the spaceless ciphertext. All seven decoding strategies run at once — decimal, octal, hex, and four binary traversal modes. Compare results to find the best match.
+      Paste the spaceless ciphertext. All seven decoding strategies run at once; decimal, octal, hex, and four binary traversal modes. Compare results to find the best match.
     </div>
 
     <div class="input-group">
@@ -138,10 +138,10 @@
     </div>
   </div>
 
-  <!-- ── Interactive Binary ── -->
+  <!--Interactive Binary-->
   <div id="tab-choice" style="display:none">
     <div class="instructions">
-      Paste spaceless binary. For each position, you'll see all valid byte options — click one to select it and advance. The preview shows what the rest of the string would decode to with that choice. Use Undo to go back.
+      Paste spaceless binary. For each position, you'll see all valid byte options; click one to select it and advance. The preview shows what the rest of the string would decode to with that choice. Use Undo to go back.
     </div>
 
     <div class="input-group">
@@ -157,7 +157,7 @@
     <div id="binchoice-area" style="display:none">
       <div class="binchoice-label" style="margin-top:20px">Decoded so far</div>
       <div class="binchoice-current" id="binchoice-output">—</div>
-      <div class="binchoice-label">Choose next byte <span style="font-weight:400;text-transform:none;letter-spacing:0">(click a row — the preview shows the rest of the string)</span></div>
+      <div class="binchoice-label">Choose next byte <span style="font-weight:400;text-transform:none;letter-spacing:0">(click a row, the preview shows the rest of the string)</span></div>
       <div id="binchoice-options"></div>
     </div>
   </div>
