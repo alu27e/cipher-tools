@@ -36,10 +36,10 @@ function runB64Brute() {
   const raw = document.getElementById('b64brute-input').value.trim();
   if (!raw) { showToast('Enter a Base64 string'); return; }
 
-  // Pad to nearest multiple of 4 (same as original)
+  //Pad to nearest multiple of 4
   const padded = raw.padEnd(Math.ceil(raw.length / 4) * 4, '=');
 
-  // Build chunk possibilities
+  //Build chunk possibilities
   const possibleB64 = [];
   for (let i = 0; i < padded.length; i += 4) {
     const chunk = padded.slice(i, i + 4);
@@ -51,13 +51,13 @@ function runB64Brute() {
     possibleB64.push(valid);
   }
 
-  // Best guess: first valid option per chunk
+  //Best guess: first valid option per chunk
   let bestGuess = '';
   for (const chunk of possibleB64) {
     bestGuess += chunk.length > 0 ? chunk[0] : '###';
   }
 
-  // Render select boxes
+  //Render select boxes
   const selectArea = document.getElementById('b64-select-boxes');
   selectArea.innerHTML = '';
 
@@ -94,7 +94,7 @@ function runB64Brute() {
     selectArea.appendChild(wrap);
   });
 
-  // Show everything
+  //Show everything
   document.getElementById('b64brute-out-area').style.display = '';
   document.getElementById('b64-output-text').value = bestGuess;
 
