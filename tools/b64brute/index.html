@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Base64 Bruteforce — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .b64-select-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .b64-chunk {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .b64-chunk-label {
+      font-size: 11px;
+      color: #999;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .b64-chunk select {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+      padding: 2px 4px;
+      min-width: 60px;
+      background: white;
+      color: #333;
+    }
+    .b64-chunk select:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+    #b64-output-text {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 14px;
+      color: #333;
+      background: #f8f9fa;
+      resize: vertical;
+      min-height: 60px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Base64 Bruteforce</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">B6</div>
+      <div class="tool-title-text">
+        <h1>Base64 Bruteforce</h1>
+        <div class="tool-description">Given a Base64 string where the casing is unknown or scrambled, this tool tries all case combinations per 4-character chunk and shows the valid printable decodings. You can manually pick the best option for each chunk.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>Base64 Input</label>
+    <input type="text" id="b64brute-input" placeholder="e.g. aGVsbG8=">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runB64Brute()">Bruteforce</button>
+    <button class="btn btn-secondary" onclick="clearB64Brute()">Clear</button>
+  </div>
+
+  <div id="b64brute-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Best Guess</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('b64brute-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="b64brute-out-content" class="output"></div>
+  </div>
+
+  <div id="b64brute-out-area" style="display:none; margin-top:24px;">
+    <div class="canvas-title">Manual chunk selection</div>
+    <div id="b64-select-boxes" class="b64-select-area"></div>
+    <textarea id="b64-output-text" readonly placeholder="Combined output will appear here…"></textarea>
+  </div>
+
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/b64brute.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('b64brute'));</script>
+</body>
+</html>
