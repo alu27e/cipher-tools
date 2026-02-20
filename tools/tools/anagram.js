@@ -2,24 +2,17 @@
 
 function permutations(arr) {
   if (arr.length <= 1) return [arr.slice()];
-  const seen = new Map();
-  arr.forEach((el, i) => {
-    const key = el;
-    if (seen.has(key)) return;
-    seen.set(key, true);
+  const result = new Map();
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i];
     const rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
-    permutations(rest).forEach(p => {
-      const w = el + p.join('');
-      if (!seen.has(w)) seen.set(w, p);
-    });
-  });
-  // rebuild as arrays
-  const result = [];
-  arr.forEach((el, i) => {
-    const rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
-    permutations(rest).forEach(p => result.push([el, ...p]));
-  });
-  return [...new Map(result.map(p => [p.join(''), p])).values()];
+    for (const p of permutations(rest)) {
+      const combo = [el, ...p];
+      const key = combo.join('');
+      if (!result.has(key)) result.set(key, combo);
+    }
+  }
+  return Array.from(result.values());
 }
 
 async function runAnagram() {
@@ -35,7 +28,6 @@ async function runAnagram() {
   const results = [];
 
   if (mode === 'pre') {
-    // Group input letters by pattern code
     const groups = {};
     for (let i = 0; i < pattern.length; i++) {
       const k = pattern[i];
@@ -63,7 +55,6 @@ async function runAnagram() {
     }
 
   } else {
-    // Post-anagram: each unique pattern letter = one word
     const wordGroups = {};
     for (let i = 0; i < pattern.length; i++) {
       const k = pattern[i];
@@ -90,9 +81,8 @@ async function runAnagram() {
   hideProgress('anagram-progress');
 
   const unique = [...new Set(results)];
-  let html = `<b style="color:var(--text-bright)">${unique.length} solution(s) found</b><br><br>`;
+  let html = `<b style="color:#2c3e50">${unique.length} solution(s) found</b><br><br>`;
   if (!unique.length) html += '<span class="result-no-match">No valid words found.</span>';
-  else html += unique.slice(0, 100).map(w => `<div class="result-item"><span class="plain-val">${escapeHTML(w)}</span></div>`).join('');
-  if (unique.length > 100) html += `<div style="color:var(--text-dim);padding:8px">…and ${unique.length - 100} more</div>`;
+  else html += unique.map(w => `<div class="result-item"><span class="plain-val">${escapeHTML(w)}</span></div>`).join('');
   showOutput('anagram-out', 'anagram-out-content', html);
 }
