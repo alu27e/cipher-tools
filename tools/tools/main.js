@@ -1,8 +1,4 @@
-/* ════════════════════════════════════════════════════════
-   main.js — shared utilities for all Ciphertool pages
-════════════════════════════════════════════════════════ */
-
-// ── Navigation ────────────────────────────────────────
+//Navigation
 const NAV_TOOLS = [
   { id: 'cipher',      label: 'Cipher Tool',   path: 'cipher/'      },
   { id: 'freq',        label: 'Freq Analysis', path: 'freq/'        },
@@ -52,7 +48,7 @@ function renderFooter() {
   el.innerHTML = `<span>Ciphertool</span>`;
 }
 
-// ── DOM helpers ───────────────────────────────────────
+//DOM helpers
 function escapeHTML(s) {
   return String(s)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
@@ -119,12 +115,10 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ── Dictionary ─────────────────────────────────────────
+//Dictionary
 let _dictionary = null;
 
-const FALLBACK_WORDS = new Set(
-  'the be to of and a in that have it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us hello world test key code secret message dog cat run fun play day night sun moon star fire water earth wind sky love life hope faith time word pass open door lock safe hide find seek look'.split(' ')
-);
+const FALLBACK_WORDS = new Set();
 
 async function loadDictionary() {
   if (_dictionary) return _dictionary;
@@ -140,12 +134,12 @@ async function loadDictionary() {
     if (badge) badge.textContent = '● ' + _dictionary.size.toLocaleString() + ' words';
   } catch(e) {
     _dictionary = FALLBACK_WORDS;
-    if (badge) badge.textContent = 'offline mode';
+    if (badge) badge.textContent = 'dictionary unavailable';
   }
   return _dictionary;
 }
 
-// ── Shared IoC computation ─────────────────────────────
+//Shared IoC computation
 function computeIoC(text, period) {
   const subs = Array.from({ length: period }, () => []);
   for (let i = 0; i < text.length; i++) subs[i % period].push(text[i]);
@@ -159,7 +153,7 @@ function computeIoC(text, period) {
   return iocs.reduce((a, b) => a + b, 0) / iocs.length;
 }
 
-// ── Shared IoC chart renderer ──────────────────────────
+//Shared IoC chart renderer
 function drawIoCChart(canvasId, iocData, topPeriods) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
@@ -174,7 +168,7 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   const padL = 70, padR = 20, padT = 30, padB = 44;
   const chartW = W - padL - padR, chartH = H - padT - padB;
 
-  // Grid lines
+  //Grid lines
   ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
   for (let g = 0; g <= 5; g++) {
     const y = padT + chartH - (g / 5) * chartH;
@@ -184,7 +178,7 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
     ctx.fillText(val, 4, y + 4);
   }
 
-  // English reference line
+  //English reference line
   const refY = padT + chartH - (0.067 / maxIoC) * chartH;
   ctx.strokeStyle = 'rgba(52,152,219,0.4)'; ctx.setLineDash([5, 5]);
   ctx.beginPath(); ctx.moveTo(padL, refY); ctx.lineTo(W - padR, refY); ctx.stroke();
@@ -192,7 +186,7 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   ctx.fillStyle = 'rgba(52,152,219,0.8)'; ctx.font = '11px sans-serif';
   ctx.fillText('English ≈ 0.067', padL + 6, refY - 5);
 
-  // Bars
+  //Bars
   const bw = Math.max(3, (chartW / iocData.length) - 2);
   iocData.forEach((d, i) => {
     const x = padL + i * (chartW / iocData.length);
@@ -206,10 +200,10 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   });
 }
 
-// ── Boot ───────────────────────────────────────────────
+//Boot
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
-  // Pre-load dictionary in background
+  //Pre-load dictionary in background
   loadDictionary();
 });
