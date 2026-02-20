@@ -24,7 +24,7 @@ async function runVigenere() {
   const mode  = document.getElementById('vig-mode').value;
   if (!input) { showToast('Enter ciphertext'); return; }
 
-  // IoC chart first
+  //IoC chart first
   const maxP  = Math.min(20, Math.floor(input.length / 2));
   const iocData = [];
   for (let p = 1; p <= maxP; p++) iocData.push({ period: p, ioc: computeIoC(input, p) });
@@ -33,7 +33,7 @@ async function runVigenere() {
   showPanel('vig-ioc-panel');
   drawIoCChart('vig-ioc-canvas', iocData, topPeriods);
 
-  // Crack
+  //Crack
   showProgress('vig-progress', 0, 'Loading dictionary…');
   const dict    = await loadDictionary();
   const results = [];
