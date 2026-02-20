@@ -2,43 +2,22 @@
 
 const COLOR_CSS = { p:'#ff69b4',r:'#e74c3c',g:'#2ecc71',y:'#f1c40f',b:'#3498db',c:'#00bcd4',G:'#95a5a6',B:'#1a1a1a',w:'#f0f0f0' };
 
-// Standard Hexahue letter mappings (A-Z)
+//Standard Hexahue letter mappings (A-Z)
 const HEX_MAP = (function() {
   const map = {};
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  // These codes represent the standard Hexahue cipher grid for A-Z
-  const codes = [
-    'rrrrrr','rrrrrg','rrrrry','rrrrrb','rrrrgr','rrrrrp',
-    'rrrrgp','rrrrgg','rrrryg','rrrrby','rrrrpg','rrrryy',
-    'rrrryb','rrrrbb','rrrrpb','rrrrbp','rrrrpp','rrrgrr',
-    'rrrgry','rrrgry','rrrgry','rrrgry','rrrgry','rrrgry',
-    'rrrgry','rrrgry'
-  ];
-  // Use a known correct set from the Hexahue standard:
-  // Each character is 6 color slots (2 rows × 3 cols)
-  // Pink=p, Red=r, Green=g, Yellow=y, Blue=b, Cyan=c
-  // Below is the actual Hexahue alphabet mapping
-  const hexCodes = [
-    'prgybc','prgycb','prgbyc','prgbcy','prgcyb','prgcby',
-    'prgybc','rpgybc','rgpybc','rgyplc','rgyblc','rgybpc',
-    'gprybc','gpyrbc','gpyrlc','gpyrbc','grpybc','grypbc',
-    'gryplc','grypbc','yrpgbc','ygprbc','ygprlc','ygprbc',
-    'byrgpc','byprgc'
-  ];
-  // Use simplified known-good mapping instead
-  // (Hexahue is a color cipher where each letter maps to a specific 6-color pattern)
-  // The actual mapping from https://www.geocachingtoolbox.com/index.php?lang=en&page=hexahue
+  //Pink=p, Red=r, Green=g, Yellow=y, Blue=b, Cyan=c
   const actualCodes = [
-    'prgybc','grpybc','ygprbc','byrpgc','cprgby','cprgyb',
-    'prgybc','rprgyb','gprgyb','yprgyb','bprgyb','cprgyb',
-    'rgrgyb','ggrgyb','ygrgyb','bgrgyb','cgrgyb','ryrgbb',
-    'gyrgyb','yyrgyb','byrgyb','cyrgyb','rbrgyb','gbrgyb',
-    'ybrgyb','bbrgyb'
+    'prgybc','rpgybc','rgpybc','rgypbc','rgybpc','rgybcp',
+    'grybcp','gyrbcp','gybrcp','gybcrp','gybcpr','ygbcpr',
+    'ybgcpr','ybcgpr','ybcpgr','ybcprg','bycprg','bcyprg',
+    'bcpyrg','bcpryg','bcprgy','cbprgy','cpbrgy','cprbgy',
+    'cprgby','cprgyb'
   ];
   letters.split('').forEach((ch, i) => {
     if (actualCodes[i]) map[actualCodes[i].toLowerCase()] = ch;
   });
-  // Numbers 0-9
+  //Numbers 0-9
   const numCodes = ['gwbgwb','wgbwgb','bgwbgw','gbwgbw','wbgwbg','bwgbwg','ggwbbw','wwbggb','bbgwwg','ggbwwb'];
   '0123456789'.split('').forEach((ch, i) => { map[numCodes[i]] = ch; });
   return map;
