@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inconsolata:wght@400;500&display=swap');
 
 :root {
-  --bg:          #fce8ef;
-  --bg-soft:     #f9dde6;
+  --bg:          #fdf0f4;
+  --bg-soft:     #fae6ed;
   --surface:     #ffffff;
   --border:      #f0dce3;
   --border2:     #e2c5d0;
@@ -49,7 +49,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   min-height: 100vh;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -82,7 +82,7 @@ body {
 
 .header-logo-mark {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--pink-deep);
   letter-spacing: 0.1em;
@@ -113,7 +113,7 @@ body {
 
 .badge {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -164,7 +164,7 @@ body {
   border-bottom: 2px solid transparent;
   color: var(--ink-dim);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
   transition: color 0.15s;
@@ -219,14 +219,14 @@ body {
 
 .tool-card-num {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--ink-faint);
   margin-bottom: 14px;
 }
 
 .tool-card-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 8px;
@@ -236,7 +236,7 @@ body {
 }
 
 .tool-card-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ink-dim);
   line-height: 1.6;
 }
@@ -250,7 +250,7 @@ body {
 
 .breadcrumb {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--ink-faint);
   margin-bottom: 18px;
@@ -270,7 +270,7 @@ body {
 
 .tool-title-code {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--pink-deep);
   background: var(--pink-light);
@@ -308,7 +308,7 @@ body {
   padding: 16px 20px;
   border-radius: var(--radius);
   margin-bottom: 28px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.85;
   color: var(--ink-mid);
 }
@@ -317,7 +317,7 @@ body {
   color: var(--ink);
   display: block;
   margin-bottom: 5px;
-  font-size: 11px;
+  font-size: 12px;
   font-family: var(--mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -337,7 +337,7 @@ body {
 .input-group label {
   display: block;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -355,7 +355,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ink);
   transition: border-color 0.15s, box-shadow 0.15s;
   outline: none;
@@ -408,7 +408,7 @@ body {
   border: 1px solid var(--border);
 }
 .btn-secondary:hover { border-color: var(--pink); color: var(--ink); }
-.btn-ghost { background: none; color: var(--ink-dim); border: none; padding: 5px 10px; font-size: 11px; }
+.btn-ghost { background: none; color: var(--ink-dim); border: none; padding: 5px 10px; font-size: 12px; }
 .btn-ghost:hover { color: var(--pink-deep); }
 
 /* ── Output ── */
@@ -427,7 +427,7 @@ body {
 }
 .output-toolbar-label {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -441,7 +441,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 0 0 var(--radius) var(--radius);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 14px;
   white-space: pre-wrap;
   word-break: break-word;
   max-height: 540px;
@@ -461,11 +461,11 @@ body {
   border-radius: var(--radius);
   line-height: 1.7;
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 14px;
 }
-.key-label   { color: var(--ink-dim); font-size: 11px; }
+.key-label   { color: var(--ink-dim); font-size: 12px; }
 .key-val     { color: var(--amber); font-weight: 600; }
-.plain-val   { color: var(--ink); font-weight: 600; font-size: 15px; }
+.plain-val   { color: var(--ink); font-weight: 600; font-size: 16px; }
 .result-no-match {
   color: var(--ink-dim);
   text-align: center;
@@ -479,7 +479,7 @@ body {
 .progress-container.visible { display: block; }
 .progress-track { width: 100%; height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
 .progress-bar { height: 100%; background: var(--pink); border-radius: 1px; transition: width 0.3s; width: 0%; }
-.progress-label { font-family: var(--mono); font-size: 10px; color: var(--ink-dim); margin-top: 6px; text-align: right; letter-spacing: 0.06em; }
+.progress-label { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); margin-top: 6px; text-align: right; letter-spacing: 0.06em; }
 
 /* ── Canvas panels ── */
 .canvas-panel {
@@ -494,7 +494,7 @@ body {
 .canvas-panel canvas { width: 100%; height: auto; display: block; }
 .canvas-title {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -527,7 +527,7 @@ body {
   text-align: center;
   padding: 24px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ink-faint);
   border-top: 1px solid var(--border);
   background: var(--surface);
@@ -544,7 +544,7 @@ body {
   padding: 10px 18px;
   border-radius: var(--radius);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
   opacity: 0;
