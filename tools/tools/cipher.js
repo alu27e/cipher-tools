@@ -30,7 +30,7 @@ function makeResult(label, val) {
   return `<div class="result-item"><span class="key-label">${escapeHTML(label)}: </span><span class="plain-val">${escapeHTML(val)}</span></div>`;
 }
 
-// ── Ciphers ────────────────────────────────────────────
+//Ciphers
 function rot(text, n) {
   return text.replace(/[a-zA-Z]/g, c => {
     const base = c <= 'Z' ? 65 : 97;
@@ -106,17 +106,17 @@ function scoreEnglish(text) {
 
 function autoDetect(raw) {
   let results = '';
-  // Base64
+  //B64
   try { const b = atob(raw.trim()); if (/^[\x20-\x7e\n\r\t]+$/.test(b)) results += makeResult('Base64', b); } catch(e) {}
-  // Morse
+  //Morse
   if (/^[.\- /]+$/.test(raw.trim())) results += makeResult('Morse Code', decodeMorse(raw));
-  // Mirror
+  //Mirror
   results += makeResult('Mirror', raw.split('').reverse().join(''));
-  // Atbash
+  //Atbash
   results += makeResult('Atbash', atbash(raw));
-  // ROT13
+  //ROT13
   results += makeResult('ROT-13', rot(raw, 13));
-  // Best Caesar
+  //Best Caesar
   const lower = raw.toLowerCase();
   let bestScore = 0, bestShift = 0;
   for (let s = 1; s <= 25; s++) {
@@ -124,7 +124,7 @@ function autoDetect(raw) {
     if (score > bestScore) { bestScore = score; bestShift = s; }
   }
   if (bestScore > 0.4) results += makeResult(`Best Caesar (ROT-${bestShift})`, rot(raw, bestShift));
-  // L2N
+  //L2N
   const l2n = decodeL2N(raw);
   if (l2n) results += makeResult('Letter → Number', l2n);
   return results || '<span class="result-no-match">No obvious encoding detected. Try a specific type.</span>';
