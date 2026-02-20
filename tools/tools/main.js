@@ -1,4 +1,4 @@
-/* main.js  */
+/*main.js*/
 
 //Navigation
 const NAV_TOOLS = [
@@ -13,6 +13,7 @@ const NAV_TOOLS = [
   { id: 'punycode',    label: 'Punycode',       path: 'punycode/'    },
   { id: 'anagram',     label: 'Anagram',        path: 'anagram/'     },
   { id: 'b64brute',    label: 'B64 Bruteforce', path: 'b64brute/'    },
+  { id: 'binspace',    label: 'Spaceless Bin',  path: 'binspace/'    },
 ];
 
 function renderNav(activeId) {
@@ -203,10 +204,10 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   });
 }
 
-//Boot 
+//Boot
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
-  //Pre-load dictionary in background
+  // Pre-load dictionary in background
   loadDictionary();
 });
