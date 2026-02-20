@@ -32,7 +32,7 @@ function runFreqAnalysis() {
     const pct = ((n / letters.length) * 100).toFixed(2);
     const bar = '▓'.repeat(Math.round(parseFloat(pct)));
     const diff = parseFloat(pct) - (EN_FREQ[c] || 0);
-    const col  = diff > 2 ? 'var(--amber)' : diff < -2 ? 'var(--red)' : 'var(--green)';
+    const col  = diff > 2 ? 'var(--pink-deep)' : diff < -2 ? 'var(--red)' : 'var(--green)';
     statsHtml += `<span style="color:${col}">${c.toUpperCase()} ${String(pct).padStart(5,' ')}%  ${escapeHTML(bar)}</span>\n`;
   });
 
@@ -43,7 +43,7 @@ function runFreqAnalysis() {
   const canvas = document.getElementById('freq-canvas');
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = '#fafaf8'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
 
   const letters26 = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const barW  = Math.floor((W - 70) / 26);
@@ -51,11 +51,11 @@ function runFreqAnalysis() {
   const padL = 55, padB = 36, padT = 30, chartH = H - padT - padB;
 
   // Grid
-  ctx.strokeStyle = '#1c2540'; ctx.lineWidth = 1;
+  ctx.strokeStyle = '#f0dce3'; ctx.lineWidth = 1;
   for (let g = 0; g <= 4; g++) {
     const y = padT + chartH - (g * 3.5 / maxPct) * chartH;
     ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - 10, y); ctx.stroke();
-    ctx.fillStyle = '#8a847a'; ctx.font = '10px monospace';
+    ctx.fillStyle = '#a07a88'; ctx.font = '11px sans-serif';
     ctx.fillText((g * 3.5).toFixed(0) + '%', 4, y + 4);
   }
 
@@ -63,7 +63,7 @@ function runFreqAnalysis() {
   letters26.forEach((c, i) => {
     const x = padL + 2 + i * barW;
     const eH = (EN_FREQ[c] / maxPct) * chartH;
-    ctx.fillStyle = 'rgba(196,98,45,0.1)';
+    ctx.fillStyle = 'rgba(212,117,143,0.12)';
     ctx.fillRect(x, padT + chartH - eH, barW - 3, eH);
   });
 
@@ -73,17 +73,17 @@ function runFreqAnalysis() {
     const pct = ((freq[c] || 0) / letters.length) * 100;
     const bH  = (pct / maxPct) * chartH;
     const diff = pct - EN_FREQ[c];
-    ctx.fillStyle = diff > 2 ? '#b07d2a' : diff < -2 ? '#b83232' : '#2e7d4f';
+    ctx.fillStyle = diff > 2 ? '#d4758f' : diff < -2 ? '#f0a0b8' : '#8fc4a8';
     ctx.fillRect(x + 3, padT + chartH - bH, barW - 9, bH);
-    ctx.fillStyle = '#8a847a'; ctx.font = '10px monospace';
+    ctx.fillStyle = '#a07a88'; ctx.font = '11px sans-serif';
     ctx.fillText(c.toUpperCase(), x + 3, padT + chartH + 15);
   });
 
   // Legend
-  const leg = [['#2e7d4f','Normal'],['#b07d2a','High'],['#b83232','Low'],['rgba(0,212,255,0.5)','English ref']];
+  const leg = [['#8fc4a8','Normal'],['#d4758f','High'],['#f0a0b8','Low'],['rgba(212,117,143,0.3)','English ref']];
   leg.forEach(([col, lbl], i) => {
     ctx.fillStyle = col; ctx.fillRect(padL + i * 140, 8, 10, 10);
-    ctx.fillStyle = '#8a847a'; ctx.font = '10px monospace';
+    ctx.fillStyle = '#a07a88'; ctx.font = '11px sans-serif';
     ctx.fillText(lbl, padL + i * 140 + 14, 18);
   });
 }
