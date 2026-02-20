@@ -1,22 +1,20 @@
 /* binspace.js */
 
-// ── Shared ─────────────────────────────────────────────
-
+//Shared 
 function validAscii(number, base, low, high) {
   if (number === '') return false;
   const n = parseInt(number, base);
   return n >= low && n <= high;
 }
 
-// ── No-space ASCII (all modes) ─────────────────────────
-
+//No-space ASCII (all modes)
 function spaceBrute(ct, mode, low, high) {
   const len = ct.length;
   let i = 0;
   const spaced = [];
 
   if (mode === 0 || mode === 1) {
-    // Decimal / Octal — window of 2-3
+    //Decimal / Octal — window of 2-3
     const base = mode === 0 ? 10 : 8;
     while (i < len - 1) {
       for (let j = 3; j > 1; j--) {
@@ -26,7 +24,7 @@ function spaceBrute(ct, mode, low, high) {
       i++;
     }
   } else if (mode === 2) {
-    // Hex — window of 1-2
+    //Hex — window of 1-2
     while (i < len - 1) {
       for (let j = 2; j > 0; j--) {
         const chunk = ct.slice(i, i + j);
@@ -35,7 +33,7 @@ function spaceBrute(ct, mode, low, high) {
       i++;
     }
   } else if (mode === 3 || mode === 4) {
-    // Binary forward — high (3) or low (4)
+    //Binary forward — high (3) or low (4)
     while (i < len - 1) {
       const range = mode === 3 ? [8,7,6,5,4,3,2,1] : [1,2,3,4,5,6,7,8];
       for (const j of range) {
@@ -45,7 +43,7 @@ function spaceBrute(ct, mode, low, high) {
       i++;
     }
   } else if (mode === 5 || mode === 6) {
-    // Binary backwards — high (5) or low (6)
+    //Binary backwards — high (5) or low (6)
     i = len;
     while (i >= 0) {
       const range = mode === 5 ? [7,6,5,4,3,2,1] : [1,2,3,4,5,6,7];
@@ -69,9 +67,9 @@ function runSpaceless() {
   if (!ct) { showToast('Enter a ciphertext'); return; }
 
   const modes = [
-    { label: 'Decimal',            mode: 0 },
-    { label: 'Octal',              mode: 1 },
-    { label: 'Hex',                mode: 2 },
+    { label: 'Decimal',                 mode: 0 },
+    { label: 'Octal',                   mode: 1 },
+    { label: 'Hex',                     mode: 2 },
     { label: 'Binary — Forward / High', mode: 3 },
     { label: 'Binary — Forward / Low',  mode: 4 },
     { label: 'Binary — Backward / High',mode: 5 },
@@ -90,8 +88,7 @@ function runSpaceless() {
   showOutput('binspace-out', 'binspace-out-content', html);
 }
 
-// ── Interactive binary choice ──────────────────────────
-
+//Interactive binary choice
 const BinState = {
   ct: '',
   history: [],
@@ -185,8 +182,7 @@ function runBinChoice() {
 
 function undoBinChoice() { BinState.undo(); }
 
-// ── Tab switching ──────────────────────────────────────
-
+//Tab switching
 function switchBinTab(tab) {
   document.getElementById('tab-spaceless').style.display = tab === 'spaceless' ? '' : 'none';
   document.getElementById('tab-choice').style.display    = tab === 'choice'    ? '' : 'none';
