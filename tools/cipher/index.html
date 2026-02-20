@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Cipher Tool — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Cipher Tool</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">CT</div>
+      <div class="tool-title-text">
+        <h1>Cipher Tool</h1>
+        <div class="tool-description">Decode classical ciphers. Choose a specific type or use auto-detect to run all of them at once.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>Ciphertext</label>
+    <textarea id="cipher-input" placeholder="Enter ciphertext…" rows="6"></textarea>
+  </div>
+
+  <div class="row">
+    <div class="input-group">
+      <label>Cipher Type</label>
+      <select id="cipher-type" onchange="toggleCipherOptions()">
+        <option value="auto">Auto-detect</option>
+        <option value="caesar">Caesar / ROT-N</option>
+        <option value="rot13">ROT-13</option>
+        <option value="atbash">Atbash</option>
+        <option value="base64">Base64</option>
+        <option value="morse">Morse Code</option>
+        <option value="mirror">Mirror (Reverse)</option>
+        <option value="l2n">Letter to Number</option>
+        <option value="railfence">Rail Fence</option>
+      </select>
+    </div>
+    <div class="input-group" id="caesar-shift-group" style="display:none;">
+      <label>Shift (0 = show all)</label>
+      <input type="number" id="caesar-shift" value="0" min="0" max="25">
+    </div>
+    <div class="input-group" id="rail-group" style="display:none;">
+      <label>Rails</label>
+      <input type="number" id="rail-count" value="3" min="2" max="10">
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runCipherTool()">Decrypt</button>
+    <button class="btn btn-secondary" onclick="clearOutput('cipher-out')">Clear</button>
+  </div>
+
+  <div id="cipher-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Result</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('cipher-out-content')">Copy</button>
+        <button class="btn btn-ghost" onclick="downloadOutput('cipher-out-content','result.txt')">Save</button>
+      </div>
+    </div>
+    <div id="cipher-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/cipher.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('cipher'));</script>
+</body>
+</html>

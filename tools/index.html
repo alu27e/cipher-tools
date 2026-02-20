@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="./">
+  <title>Ciphertool — cryptanalysis utilities</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header" id="main-header"></header>
+<nav class="nav-container" aria-label="Tools"><div class="nav" id="main-nav"></div></nav>
+
+<main class="container page-in">
+  <div class="hero">
+    <div class="hero-left">
+      <h2>Break ciphers.<br><em>Decode anything.</em></h2>
+    </div>
+    <div class="hero-right">
+      <p>A collection of cryptanalysis tools built for puzzles, CTFs, and cipher research. Everything runs in your browser — no data is sent anywhere.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">10 tools</div>
+        <div class="hero-meta-item">fully client-side</div>
+        <div class="hero-meta-item">no account required</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tools-label">Tools</div>
+
+  <div class="tool-grid">
+    <a class="tool-card" href="cipher/">
+      <div class="tool-card-num">01</div>
+      <div class="tool-card-name">Cipher Tool</div>
+      <div class="tool-card-desc">Auto-detect and decode Caesar, Base64, Morse, Atbash, Rail Fence, and more in one pass.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="freq/">
+      <div class="tool-card-num">02</div>
+      <div class="tool-card-name">Frequency Analysis <span class="tool-card-new">new</span></div>
+      <div class="tool-card-desc">Letter frequency chart versus English. Identifies Caesar shifts using chi-squared scoring.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="vigenere/">
+      <div class="tool-card-num">03</div>
+      <div class="tool-card-name">Vigenère Cracker</div>
+      <div class="tool-card-desc">Dictionary and brute-force attacks with built-in Index of Coincidence key-length analysis.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="beaufort/">
+      <div class="tool-card-num">04</div>
+      <div class="tool-card-name">Beaufort Cracker</div>
+      <div class="tool-card-desc">Dictionary attack against the Beaufort cipher. Self-reciprocal — encrypts and decrypts identically.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="hexahue/">
+      <div class="tool-card-num">05</div>
+      <div class="tool-card-name">Hexahue Decoder</div>
+      <div class="tool-card-desc">Decode the Hexahue color-block cipher with a full visual grid alongside the decoded text.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="ioc/">
+      <div class="tool-card-num">06</div>
+      <div class="tool-card-name">IoC Analyzer</div>
+      <div class="tool-card-desc">Index of Coincidence analysis to surface key lengths in Vigenère and polyalphabetic ciphers.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="word-finder/">
+      <div class="tool-card-num">07</div>
+      <div class="tool-card-name">Word Finder</div>
+      <div class="tool-card-desc">Find valid English words from constrained letter positions using a simple bracket notation.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="keyboard/">
+      <div class="tool-card-num">08</div>
+      <div class="tool-card-name">Keyboard Heatmap</div>
+      <div class="tool-card-desc">Letter frequency mapped onto QWERTY, AZERTY, QWERTZ, or Dvorak. Useful for keyboard-walk ciphers.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="punycode/">
+      <div class="tool-card-num">09</div>
+      <div class="tool-card-name">Punycode</div>
+      <div class="tool-card-desc">Full RFC 3492 decode and encode for internationalized domain names. Shows Unicode codepoints.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+    <a class="tool-card" href="anagram/">
+      <div class="tool-card-num">10</div>
+      <div class="tool-card-name">Anagram Solver</div>
+      <div class="tool-card-desc">Pre- and post-anagram pattern solver with dictionary verification of all candidate words.</div>
+      <div class="tool-card-arrow">&#x2197;</div>
+    </a>
+  </div>
+</main>
+
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+
+<script src="tools/main.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav(''));</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Vigenère Cracker — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Vigenère Cracker</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">VC</div>
+      <div class="tool-title-text">
+        <h1>Vigenère Cracker</h1>
+        <div class="tool-description">Break Vigenère ciphers via dictionary attack or brute force. An IoC chart is shown automatically to help identify the most likely key lengths.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>How it works</strong>
+    Dictionary mode tries every word in the wordlist as a key. Brute force tries all letter combinations up to a chosen length.
+    The IoC chart highlights candidate key lengths — look for bars near <code>0.067</code> (English average).
+    Brute force becomes very slow beyond key length 4.
+  </div>
+
+  <div class="input-group">
+    <label>Ciphertext</label>
+    <input type="text" id="vig-input" placeholder="Letters only…">
+  </div>
+
+  <div class="row">
+    <div class="input-group">
+      <label>Attack Mode</label>
+      <select id="vig-mode" onchange="toggleVigOptions()">
+        <option value="dictionary">Dictionary Attack</option>
+        <option value="brute">Brute Force</option>
+      </select>
+    </div>
+    <div class="input-group" id="vig-brute-options" style="display:none;">
+      <label>Max Key Length</label>
+      <input type="number" id="vig-max-length" value="4" min="2" max="8">
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runVigenere()">Crack</button>
+    <button class="btn btn-secondary" onclick="clearVig()">Clear</button>
+  </div>
+
+  <div class="progress-container" id="vig-progress">
+    <div class="progress-track"><div class="progress-bar" id="vig-progress-bar"></div></div>
+    <div class="progress-label" id="vig-progress-label">0%</div>
+  </div>
+
+  <div id="vig-ioc-panel" class="canvas-panel">
+    <div class="canvas-title">Index of Coincidence by Key Length</div>
+    <canvas id="vig-ioc-canvas" width="900" height="280"></canvas>
+  </div>
+
+  <div id="vig-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Results</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('vig-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="vig-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/vigenere.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('vigenere'));</script>
+</body>
+</html>

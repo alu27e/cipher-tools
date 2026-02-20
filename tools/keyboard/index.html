@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Keyboard Heatmap — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Keyboard Heatmap</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">KM</div>
+      <div class="tool-title-text">
+        <h1>Keyboard Heatmap</h1>
+        <div class="tool-description">Visualise letter frequency on a physical keyboard layout. Useful for detecting keyboard-walk ciphers and key-position patterns.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>Text to Analyse</label>
+    <textarea id="keyboard-input" placeholder="Enter or paste text…"></textarea>
+  </div>
+
+  <div class="input-group">
+    <label>Layout</label>
+    <select id="keyboard-layout">
+      <option value="qwerty">QWERTY</option>
+      <option value="azerty">AZERTY</option>
+      <option value="qwertz">QWERTZ</option>
+      <option value="dvorak">Dvorak</option>
+    </select>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runKeyboard()">Generate Heatmap</button>
+    <button class="btn btn-secondary" onclick="clearOutput('keyboard-out')">Clear</button>
+  </div>
+
+  <div id="keyboard-out" class="output-wrapper">
+    <div class="output-toolbar"><span class="output-toolbar-label">Heatmap</span></div>
+    <div id="keyboard-out-content" class="output output-text"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/keyboard.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('keyboard'));</script>
+</body>
+</html>

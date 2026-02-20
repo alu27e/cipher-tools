@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Punycode — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Punycode</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">PC</div>
+      <div class="tool-title-text">
+        <h1>Punycode</h1>
+        <div class="tool-description">Full RFC 3492 Bootstring decode and encode for internationalized domain names. Shows Unicode codepoints alongside the result.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>Decoding</strong>
+    Enter the punycode without the <code>xn--</code> prefix. For <code>xn--n3h.ws</code>, enter <code>n3h</code>.<br>
+    <strong>Encoding</strong>
+    Enter a Unicode string (emoji, non-ASCII text) to get its punycode representation.
+  </div>
+
+  <div class="input-group">
+    <label>Direction</label>
+    <select id="punycode-dir">
+      <option value="decode">Decode — punycode to Unicode</option>
+      <option value="encode">Encode — Unicode to punycode</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>Input</label>
+    <input type="text" id="punycode-input" placeholder="Enter punycode without xn-- prefix…">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runPunycode()">Convert</button>
+    <button class="btn btn-secondary" onclick="clearOutput('punycode-out')">Clear</button>
+  </div>
+
+  <div id="punycode-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Result</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('punycode-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="punycode-out-content" class="output output-text"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/punycode.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('punycode'));</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Hexahue Decoder — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Hexahue Decoder</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">HX</div>
+      <div class="tool-title-text">
+        <h1>Hexahue Decoder</h1>
+        <div class="tool-description">Decode the Hexahue color cipher. Each character is a 2×3 grid of six color codes, rendered visually alongside the decoded text.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>Color codes — Letters</strong>
+    <code>p</code> pink &nbsp; <code>r</code> red &nbsp; <code>g</code> green &nbsp; <code>y</code> yellow &nbsp; <code>b</code> blue &nbsp; <code>c</code> cyan<br>
+    <strong>Color codes — Numbers</strong>
+    <code>G</code> gray &nbsp; <code>B</code> black &nbsp; <code>w</code> white<br>
+    <strong>Format:</strong> space-separated 6-character codes — e.g. <code>prgybc rpgybc rgpybc</code>
+  </div>
+
+  <div class="input-group">
+    <label>Hexahue Codes</label>
+    <input type="text" id="hexahue-input" placeholder="prgybc rpgybc rgpybc …">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runHexahue()">Decode</button>
+    <button class="btn btn-secondary" onclick="clearHexahue()">Clear</button>
+  </div>
+
+  <div id="hexahue-visual-area" style="display:none; margin-top:24px;">
+    <div class="canvas-panel visible" style="margin-top:0;">
+      <div class="canvas-title">Visual Grid</div>
+      <div id="hexahue-grid-display" class="hexahue-visual"></div>
+    </div>
+  </div>
+
+  <div id="hexahue-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Decoded Text</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('hexahue-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="hexahue-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/hexahue.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('hexahue'));</script>
+</body>
+</html>

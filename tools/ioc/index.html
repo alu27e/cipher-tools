@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>IoC Analyzer — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> IoC Analyzer</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">IC</div>
+      <div class="tool-title-text">
+        <h1>IoC Analyzer</h1>
+        <div class="tool-description">Find likely key lengths for Vigenère and other polyalphabetic ciphers using the Index of Coincidence.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>How to read the chart</strong>
+    English plaintext has IoC near <code>0.067</code>. Random text sits around <code>0.038</code>.
+    When a period matches the actual key length, each sub-sequence behaves like a monoalphabetic cipher, pushing the IoC toward English.
+    The highest bars are your best candidate key lengths.
+  </div>
+
+  <div class="input-group">
+    <label>Ciphertext</label>
+    <textarea id="ioc-input" placeholder="Paste ciphertext…"></textarea>
+  </div>
+
+  <div class="input-group">
+    <label>Max Period to Test</label>
+    <input type="number" id="ioc-max-period" value="30" min="5" max="100">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runIoC()">Analyse</button>
+    <button class="btn btn-secondary" onclick="clearIoC()">Clear</button>
+  </div>
+
+  <div id="ioc-canvas-panel" class="canvas-panel">
+    <div class="canvas-title">Index of Coincidence by Period</div>
+    <canvas id="ioc-canvas" width="1000" height="380"></canvas>
+  </div>
+
+  <div id="ioc-out" class="output-wrapper">
+    <div class="output-toolbar"><span class="output-toolbar-label">Top Candidates</span></div>
+    <div id="ioc-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/ioc.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('ioc'));</script>
+</body>
+</html>

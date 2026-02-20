@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Anagram Solver — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Anagram Solver</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">AG</div>
+      <div class="tool-title-text">
+        <h1>Anagram Solver</h1>
+        <div class="tool-description">Solve pattern-based anagram puzzles in pre- or post-anagram mode with dictionary verification.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>Pre-Anagram</strong>
+    The pattern groups letters by position. Same letter in the pattern = letters belong to the same output group.<br>
+    Example: text <code>sodnhtfdeeci</code> pattern <code>ccaabbacbcca</code><br>
+    <strong>Post-Anagram</strong>
+    Each unique pattern letter represents one word. Same pattern letter = same word.<br>
+    Example: text <code>tobolikl</code> pattern <code>aaaabbbb</code> gives two 4-letter words.
+  </div>
+
+  <div class="input-group">
+    <label>Mode</label>
+    <select id="anagram-mode">
+      <option value="pre">Pre-Anagram</option>
+      <option value="post">Post-Anagram</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>Scrambled Text</label>
+    <input type="text" id="anagram-text" placeholder="sodnhtfdeeci">
+  </div>
+
+  <div class="input-group">
+    <label>Pattern</label>
+    <input type="text" id="anagram-pattern" placeholder="ccaabbacbcca">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runAnagram()">Solve</button>
+    <button class="btn btn-secondary" onclick="clearOutput('anagram-out')">Clear</button>
+  </div>
+
+  <div class="progress-container" id="anagram-progress">
+    <div class="progress-track"><div class="progress-bar" id="anagram-progress-bar"></div></div>
+    <div class="progress-label" id="anagram-progress-label">0%</div>
+  </div>
+
+  <div id="anagram-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Solutions</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('anagram-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="anagram-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/anagram.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('anagram'));</script>
+</body>
+</html>

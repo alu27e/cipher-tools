@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Beaufort Cracker — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Beaufort Cracker</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">BF</div>
+      <div class="tool-title-text">
+        <h1>Beaufort Cracker</h1>
+        <div class="tool-description">Break Beaufort cipher using a dictionary attack. Similar to Vigenère but uses subtraction rather than addition.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>About Beaufort</strong>
+    Encrypts as <code>C = (K − P) mod 26</code> instead of Vigenère's <code>(P + K) mod 26</code>.
+    It is self-reciprocal — encrypting twice returns the original plaintext.
+    This tool tries every word in the dictionary as a potential key.
+  </div>
+
+  <div class="input-group">
+    <label>Ciphertext</label>
+    <input type="text" id="beaufort-input" placeholder="Letters only…">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runBeaufort()">Crack</button>
+    <button class="btn btn-secondary" onclick="clearOutput('beaufort-out')">Clear</button>
+  </div>
+
+  <div class="progress-container" id="beaufort-progress">
+    <div class="progress-track"><div class="progress-bar" id="beaufort-progress-bar"></div></div>
+    <div class="progress-label" id="beaufort-progress-label">0%</div>
+  </div>
+
+  <div id="beaufort-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Results</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('beaufort-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="beaufort-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/beaufort.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('beaufort'));</script>
+</body>
+</html>

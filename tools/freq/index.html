@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Frequency Analysis — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Frequency Analysis</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">FA</div>
+      <div class="tool-title-text">
+        <h1>Frequency Analysis</h1>
+        <div class="tool-description">Compare letter frequencies against expected English. Peaks reveal Caesar shifts; flat distributions suggest polyalphabetic ciphers like Vigenère.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>Reading the chart</strong>
+    Green bars are close to the English average. Amber means higher than expected, red means lower.
+    The best Caesar shift is found using chi-squared scoring — a lower chi² score means a better match.
+  </div>
+
+  <div class="input-group">
+    <label>Text to Analyse</label>
+    <textarea id="freq-input" placeholder="Paste ciphertext here…" rows="7"></textarea>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runFreqAnalysis()">Analyse</button>
+    <button class="btn btn-secondary" onclick="clearFreq()">Clear</button>
+  </div>
+
+  <div id="freq-canvas-panel" class="canvas-panel">
+    <div class="canvas-title">Letter Frequency vs English</div>
+    <canvas id="freq-canvas" width="900" height="340"></canvas>
+  </div>
+
+  <div id="freq-stats" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Statistics</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('freq-stats-content')">Copy</button>
+      </div>
+    </div>
+    <div id="freq-stats-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/freq.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('freq'));</script>
+</body>
+</html>

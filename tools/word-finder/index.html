@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Word Finder — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Word Finder</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">WF</div>
+      <div class="tool-title-text">
+        <h1>Word Finder</h1>
+        <div class="tool-description">Find valid English words from constrained letter positions using bracket notation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>Bracket notation</strong>
+    Each <code>[bracket]</code> is one position in the word. List possible letters or multi-character options separated by spaces.<br>
+    Single chars: <code>[ABC][DEF][GHI]</code><br>
+    Multi-char: <code>[TH ST][EI][R]</code> — each space-separated token is one option for that position.
+  </div>
+
+  <div class="input-group">
+    <label>Pattern</label>
+    <input type="text" id="word-finder-input" placeholder="[ABC][DEF][GHI]">
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="runWordFinder()">Find Words</button>
+    <button class="btn btn-secondary" onclick="clearOutput('word-finder-out')">Clear</button>
+  </div>
+
+  <div class="progress-container" id="word-finder-progress">
+    <div class="progress-track"><div class="progress-bar" id="word-finder-progress-bar"></div></div>
+    <div class="progress-label" id="word-finder-progress-label">0%</div>
+  </div>
+
+  <div id="word-finder-out" class="output-wrapper">
+    <div class="output-toolbar">
+      <span class="output-toolbar-label">Matches</span>
+      <div class="output-toolbar-actions">
+        <button class="btn btn-ghost" onclick="copyOutput('word-finder-out-content')">Copy</button>
+      </div>
+    </div>
+    <div id="word-finder-out-content" class="output"></div>
+  </div>
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/wordfinder.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('word-finder'));</script>
+</body>
+</html>
