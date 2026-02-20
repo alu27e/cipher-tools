@@ -53,7 +53,7 @@ function decodePunycode(input) {
 }
 
 function encodePunycode(input) {
-  // Basic ASCII pass-through + encode non-ASCII
+  //Basic ASCII pass-through + encode non-ASCII
   const codePoints = [...input].map(c => c.codePointAt(0));
   const basicPoints = codePoints.filter(cp => cp < 128);
   let output = basicPoints.map(cp => String.fromCodePoint(cp)).join('');
