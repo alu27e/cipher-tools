@@ -49,7 +49,7 @@ function renderHeader() {
 function renderFooter() {
   const el = document.getElementById('main-footer');
   if (!el) return;
-  el.innerHTML = `<span>Ciphertool</span> · all processing client-side · no data leaves your browser`;
+  el.innerHTML = `<span>Ciphertool</span>`;
 }
 
 // ── DOM helpers ───────────────────────────────────────
@@ -166,7 +166,7 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
   ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#fafaf8';
+  ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, W, H);
 
   if (!iocData.length) return;
@@ -175,21 +175,21 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   const chartW = W - padL - padR, chartH = H - padT - padB;
 
   // Grid lines
-  ctx.strokeStyle = '#ddd8ce'; ctx.lineWidth = 1;
+  ctx.strokeStyle = '#f0dce3'; ctx.lineWidth = 1;
   for (let g = 0; g <= 5; g++) {
     const y = padT + chartH - (g / 5) * chartH;
     const val = ((g / 5) * maxIoC).toFixed(4);
     ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
-    ctx.fillStyle = '#8a847a'; ctx.font = '10px monospace';
+    ctx.fillStyle = '#a07a88'; ctx.font = '11px sans-serif';
     ctx.fillText(val, 4, y + 4);
   }
 
   // English reference line
   const refY = padT + chartH - (0.067 / maxIoC) * chartH;
-  ctx.strokeStyle = 'rgba(196,98,45,0.3)'; ctx.setLineDash([5, 5]);
+  ctx.strokeStyle = 'rgba(212,117,143,0.4)'; ctx.setLineDash([5, 5]);
   ctx.beginPath(); ctx.moveTo(padL, refY); ctx.lineTo(W - padR, refY); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = 'rgba(196,98,45,0.7)'; ctx.font = '10px monospace';
+  ctx.fillStyle = 'rgba(212,117,143,0.8)'; ctx.font = '11px sans-serif';
   ctx.fillText('English ≈ 0.067', padL + 6, refY - 5);
 
   // Bars
@@ -198,9 +198,9 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
     const x = padL + i * (chartW / iocData.length);
     const bH = (d.ioc / maxIoC) * chartH;
     const isTop = topPeriods.includes(d.period);
-    ctx.fillStyle = isTop ? '#c4622d' : 'rgba(196,98,45,0.25)';
+    ctx.fillStyle = isTop ? '#d4758f' : 'rgba(212,117,143,0.3)';
     ctx.fillRect(x, padT + chartH - bH, bw, bH);
-    ctx.fillStyle = '#8a847a'; ctx.font = '10px monospace';
+    ctx.fillStyle = '#a07a88'; ctx.font = '11px sans-serif';
     const label = String(d.period);
     ctx.fillText(label, x + bw / 2 - (label.length * 3), padT + chartH + 15);
   });
