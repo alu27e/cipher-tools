@@ -10,7 +10,7 @@ function runFreqAnalysis() {
   const freq = {};
   for (const c of letters) freq[c] = (freq[c] || 0) + 1;
 
-  // Chi-squared for each Caesar shift
+  //Chi-squared for each Caesar shift
   let bestShift = 0, bestChi = Infinity;
   for (let s = 0; s < 26; s++) {
     let chi = 0;
@@ -22,7 +22,7 @@ function runFreqAnalysis() {
     if (chi < bestChi) { bestChi = chi; bestShift = s; }
   }
 
-  // Stats output
+  //Stats output
   const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
   let statsHtml = `<b style="color:var(--text-bright)">Total letters: ${letters.length}</b>\n`;
   statsHtml += `<span style="color:var(--text-dim)">Best Caesar shift: </span><span style="color:var(--amber)">${bestShift === 0 ? 'none (likely not Caesar)' : 'ROT-' + bestShift}</span>\n`;
@@ -38,7 +38,7 @@ function runFreqAnalysis() {
 
   showOutput('freq-stats', 'freq-stats-content', statsHtml);
 
-  // Canvas
+  //Canvas
   showPanel('freq-canvas-panel');
   const canvas = document.getElementById('freq-canvas');
   const ctx = canvas.getContext('2d');
@@ -50,7 +50,7 @@ function runFreqAnalysis() {
   const maxPct = 14;
   const padL = 55, padB = 36, padT = 30, chartH = H - padT - padB;
 
-  // Grid
+  //Grid
   ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
   for (let g = 0; g <= 4; g++) {
     const y = padT + chartH - (g * 3.5 / maxPct) * chartH;
@@ -59,7 +59,7 @@ function runFreqAnalysis() {
     ctx.fillText((g * 3.5).toFixed(0) + '%', 4, y + 4);
   }
 
-  // English ref bars
+  //English ref bars
   letters26.forEach((c, i) => {
     const x = padL + 2 + i * barW;
     const eH = (EN_FREQ[c] / maxPct) * chartH;
@@ -67,7 +67,7 @@ function runFreqAnalysis() {
     ctx.fillRect(x, padT + chartH - eH, barW - 3, eH);
   });
 
-  // Observed bars
+  //Observed bars
   letters26.forEach((c, i) => {
     const x   = padL + 2 + i * barW;
     const pct = ((freq[c] || 0) / letters.length) * 100;
@@ -79,7 +79,7 @@ function runFreqAnalysis() {
     ctx.fillText(c.toUpperCase(), x + 3, padT + chartH + 15);
   });
 
-  // Legend
+  //Legend
   const leg = [['#2ecc71','Normal'],['#3498db','High'],['#e74c3c','Low'],['rgba(52,152,219,0.2)','English ref']];
   leg.forEach(([col, lbl], i) => {
     ctx.fillStyle = col; ctx.fillRect(padL + i * 140, 8, 10, 10);
