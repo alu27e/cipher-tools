@@ -1,3 +1,5 @@
+/* main.js  */
+
 //Navigation
 const NAV_TOOLS = [
   { id: 'cipher',      label: 'Cipher Tool',   path: 'cipher/'      },
@@ -10,6 +12,7 @@ const NAV_TOOLS = [
   { id: 'keyboard',    label: 'Keyboard Map',  path: 'keyboard/'    },
   { id: 'punycode',    label: 'Punycode',       path: 'punycode/'    },
   { id: 'anagram',     label: 'Anagram',        path: 'anagram/'     },
+  { id: 'b64brute',    label: 'B64 Bruteforce', path: 'b64brute/'    },
 ];
 
 function renderNav(activeId) {
@@ -200,7 +203,7 @@ function drawIoCChart(canvasId, iocData, topPeriods) {
   });
 }
 
-//Boot
+//Boot 
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
