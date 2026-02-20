@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ct-base" content="../">
+  <title>Spaceless Binary — Ciphertool</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .bin-tab-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .bin-tab-btn {
+      padding: 8px 18px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .bin-tab-btn:hover { border-color: #3498db; color: #3498db; }
+    .bin-tab-btn.active { background: #3498db; color: white; border-color: #3498db; }
+
+    /* Interactive choice */
+    #binchoice-area { margin-top: 24px; }
+    .binchoice-current {
+      font-family: monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: #2c3e50;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 12px 18px;
+      margin-bottom: 16px;
+      min-height: 48px;
+    }
+    #binchoice-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .binchoice-option {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 10px 16px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-left: 3px solid #3498db;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .binchoice-option:hover { background: #f0f7ff; }
+    .binchoice-letter {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2c3e50;
+      min-width: 36px;
+    }
+    .binchoice-preview {
+      font-family: monospace;
+      font-size: 14px;
+      color: #888;
+    }
+    .binchoice-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #999;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<header class="header" id="main-header"></header>
+<nav class="nav-container"><div class="nav" id="main-nav"></div></nav>
+<main class="container page-in">
+
+  <div class="tool-header">
+    <div class="breadcrumb"><a href="../">Home</a> <span class="breadcrumb-sep">/</span> Spaceless Binary</div>
+    <div class="tool-title-area">
+      <div class="tool-title-code">SB</div>
+      <div class="tool-title-text">
+        <h1>Spaceless Binary</h1>
+        <div class="tool-description">Recover text from n-bit binary (or decimal, octal, hex) that has had its spacing and leading zeros removed. Two modes: run all strategies at once, or decode interactively one byte at a time.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bin-tab-bar">
+    <button class="bin-tab-btn active" id="bintab-spaceless" onclick="switchBinTab('spaceless')">All Modes</button>
+    <button class="bin-tab-btn" id="bintab-choice" onclick="switchBinTab('choice')">Interactive Binary</button>
+  </div>
+
+  <!-- ── All Modes ── -->
+  <div id="tab-spaceless">
+    <div class="instructions">
+      Paste the spaceless ciphertext. All seven decoding strategies run at once — decimal, octal, hex, and four binary traversal modes. Compare results to find the best match.
+    </div>
+
+    <div class="input-group">
+      <label>Ciphertext</label>
+      <textarea id="binspace-input" rows="4" placeholder="e.g. 1001000110010111011001101100110111110000010101111101111111001011011001100100100001"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="input-group">
+        <label>Min ASCII value</label>
+        <input type="number" id="binspace-low" value="32">
+      </div>
+      <div class="input-group">
+        <label>Max ASCII value</label>
+        <input type="number" id="binspace-high" value="126">
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="runSpaceless()">Decode</button>
+      <button class="btn btn-secondary" onclick="clearOutput('binspace-out')">Clear</button>
+    </div>
+
+    <div id="binspace-out" class="output-wrapper">
+      <div class="output-toolbar">
+        <span class="output-toolbar-label">Results</span>
+        <div class="output-toolbar-actions">
+          <button class="btn btn-ghost" onclick="copyOutput('binspace-out-content')">Copy</button>
+        </div>
+      </div>
+      <div id="binspace-out-content" class="output output-text"></div>
+    </div>
+  </div>
+
+  <!-- ── Interactive Binary ── -->
+  <div id="tab-choice" style="display:none">
+    <div class="instructions">
+      Paste spaceless binary. For each position, you'll see all valid byte options — click one to select it and advance. The preview shows what the rest of the string would decode to with that choice. Use Undo to go back.
+    </div>
+
+    <div class="input-group">
+      <label>Binary Ciphertext</label>
+      <textarea id="binchoice-input" rows="4" placeholder="e.g. 1001000110010111011001101100110111110000010101111101111"></textarea>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="runBinChoice()">Start</button>
+      <button class="btn btn-secondary" onclick="undoBinChoice()">Undo</button>
+    </div>
+
+    <div id="binchoice-area" style="display:none">
+      <div class="binchoice-label" style="margin-top:20px">Decoded so far</div>
+      <div class="binchoice-current" id="binchoice-output">—</div>
+      <div class="binchoice-label">Choose next byte <span style="font-weight:400;text-transform:none;letter-spacing:0">(click a row — the preview shows the rest of the string)</span></div>
+      <div id="binchoice-options"></div>
+    </div>
+  </div>
+
+</main>
+<footer class="footer" id="main-footer"></footer>
+<div class="toast" id="toast"></div>
+<script src="../tools/main.js"></script>
+<script src="../tools/binspace.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => renderNav('binspace'));</script>
+</body>
+</html>
