@@ -38,7 +38,7 @@ function runKeyboard() {
   });
   html += '</div>';
 
-  // Frequency table
+  //Frequency table
   const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
   if (sorted.length) {
     html += '<div style="margin-top:18px;font-size:12px;color:var(--text-dim);line-height:2">';
