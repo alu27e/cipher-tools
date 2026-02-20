@@ -4,16 +4,16 @@
 
 // ── Navigation ────────────────────────────────────────
 const NAV_TOOLS = [
-  { id: 'cipher',      label: 'Cipher Tool',    path: 'cipher/'      },
-  { id: 'freq',        label: 'Freq Analysis',  path: 'freq/',        isNew: true },
-  { id: 'vigenere',    label: 'Vigenère',        path: 'vigenere/'    },
-  { id: 'beaufort',    label: 'Beaufort',        path: 'beaufort/'    },
-  { id: 'hexahue',     label: 'Hexahue',         path: 'hexahue/'     },
-  { id: 'ioc',         label: 'IoC Analyzer',   path: 'ioc/'         },
-  { id: 'word-finder', label: 'Word Finder',    path: 'word-finder/' },
-  { id: 'keyboard',    label: 'Keyboard Map',   path: 'keyboard/'    },
-  { id: 'punycode',    label: 'Punycode',        path: 'punycode/'    },
-  { id: 'anagram',     label: 'Anagram',         path: 'anagram/'     },
+  { id: 'cipher',      label: 'Cipher Tool',   path: 'cipher/'      },
+  { id: 'freq',        label: 'Freq Analysis', path: 'freq/'        },
+  { id: 'vigenere',    label: 'Vigenère',       path: 'vigenere/'    },
+  { id: 'beaufort',    label: 'Beaufort',       path: 'beaufort/'    },
+  { id: 'hexahue',     label: 'Hexahue',        path: 'hexahue/'     },
+  { id: 'ioc',         label: 'IoC Analyzer',  path: 'ioc/'         },
+  { id: 'word-finder', label: 'Word Finder',   path: 'word-finder/' },
+  { id: 'keyboard',    label: 'Keyboard Map',  path: 'keyboard/'    },
+  { id: 'punycode',    label: 'Punycode',       path: 'punycode/'    },
+  { id: 'anagram',     label: 'Anagram',        path: 'anagram/'     },
 ];
 
 function renderNav(activeId) {
@@ -23,9 +23,8 @@ function renderNav(activeId) {
 
   let html = '';
   NAV_TOOLS.forEach(t => {
-    const active   = t.id === activeId ? ' active' : '';
-    const newBadge = t.isNew ? ' <span class="new-badge">new</span>' : '';
-    html += `<a class="nav-item${active}" href="${base}${t.path}">${t.label}${newBadge}</a>`;
+    const active = t.id === activeId ? ' active' : '';
+    html += `<a class="nav-item${active}" href="${base}${t.path}">${t.label}</a>`;
   });
   navEl.innerHTML = html;
 }
