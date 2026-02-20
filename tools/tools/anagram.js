@@ -37,7 +37,7 @@ async function runAnagram() {
   let html = '';
 
   if (mode === 'pre') {
-    // Group letters by pattern key
+    //Group letters by pattern key
     const groups = {};
     for (let i = 0; i < pattern.length; i++) {
       const k = pattern[i];
@@ -46,7 +46,7 @@ async function runAnagram() {
     }
     const groupKeys = Object.keys(groups).sort();
 
-    // Find all dictionary anagrams for each group
+    //Find all dictionary anagrams for each group
     const groupMatches = {};
     let anyEmpty = false;
     for (const k of groupKeys) {
@@ -55,7 +55,7 @@ async function runAnagram() {
       if (matches.length === 0) anyEmpty = true;
     }
 
-    // Show group breakdown
+    //Show group breakdown
     for (const k of groupKeys) {
       const m = groupMatches[k];
       html += `<div class="result-item">`;
@@ -71,7 +71,7 @@ async function runAnagram() {
     if (anyEmpty) {
       html += `<br><span class="result-no-match">One or more groups had no dictionary matches — no full solutions possible.</span>`;
     } else {
-      // Combine every combination across groups and reassemble into full string
+      //Combine every combination across groups and reassemble into full string
       const results = new Set();
 
       function combine(idx, chosen) {
@@ -90,7 +90,7 @@ async function runAnagram() {
     }
 
   } else {
-    // Post-anagram: lengths from pattern, find words from dict that use the letters
+    //Post-anagram: lengths from pattern, find words from dict that use the letters
     const lengths = getWordLengths(pattern);
     html += `<b style="color:#2c3e50">Word lengths: ${lengths.join(' + ')}</b><br><br>`;
     showProgress('anagram-progress', 10, 'Searching…');
