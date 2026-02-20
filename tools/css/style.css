@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inconsolata:wght@400;500&display=swap');
 
 :root {
-  --bg:          #ffffff;
-  --bg-soft:     #fdf6f8;
+  --bg:          #fce8ef;
+  --bg-soft:     #f9dde6;
   --surface:     #ffffff;
   --border:      #f0dce3;
   --border2:     #e2c5d0;
@@ -33,9 +33,9 @@
   --amber:       #c49a5a;
   --red:         #d4706e;
 
-  --sans:   'DM Sans', system-ui, sans-serif;
-  --mono:   'DM Mono', 'Courier New', monospace;
-  --serif:  'DM Sans', system-ui, sans-serif;
+  --sans:   'Nunito', system-ui, sans-serif;
+  --mono:   'Inconsolata', 'Courier New', monospace;
+  --serif:  'Nunito', system-ui, sans-serif;
 
   --radius:    6px;
   --radius-lg: 12px;
@@ -59,7 +59,7 @@ body {
 
 /* ── Header ── */
 .header {
-  background: var(--bg);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 18px 0;
 }
@@ -138,7 +138,7 @@ body {
 
 /* ── Nav ── */
 .nav-container {
-  background: var(--bg);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -193,87 +193,18 @@ body {
   padding: 48px 32px 80px;
 }
 
-/* ── Home hero ── */
-.hero {
-  padding: 64px 0 52px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 52px;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 64px;
-  align-items: end;
-}
-
-.hero-left h2 {
-  font-family: var(--sans);
-  font-size: 52px;
-  font-weight: 300;
-  color: var(--ink);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-.hero-left h2 em {
-  font-style: italic;
-  color: var(--pink-deep);
-  font-weight: 400;
-}
-
-.hero-right p {
-  font-size: 15px;
-  color: var(--ink-mid);
-  line-height: 1.8;
-  margin-bottom: 24px;
-}
-.hero-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.hero-meta-item {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-dim);
-  letter-spacing: 0.04em;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.hero-meta-item::before {
-  content: '';
-  width: 14px;
-  height: 1px;
-  background: var(--border2);
-  flex-shrink: 0;
-}
+/* hero removed */
 
 /* ── Tool grid ── */
-.tools-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.tools-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  margin-top: 8px;
 }
 
 .tool-card {
@@ -285,7 +216,6 @@ body {
   position: relative;
 }
 .tool-card:hover { background: var(--bg-soft); }
-.tool-card:hover .tool-card-arrow { opacity: 1; transform: translate(2px, -2px); }
 
 .tool-card-num {
   font-family: var(--mono);
@@ -304,32 +234,11 @@ body {
   align-items: center;
   gap: 8px;
 }
-.tool-card-new {
-  font-family: var(--mono);
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--green);
-  border: 1px solid var(--green);
-  padding: 1px 5px;
-  border-radius: 3px;
-  text-transform: uppercase;
-}
 
 .tool-card-desc {
   font-size: 13px;
   color: var(--ink-dim);
   line-height: 1.6;
-}
-
-.tool-card-arrow {
-  position: absolute;
-  top: 26px;
-  right: 24px;
-  font-size: 15px;
-  color: var(--pink-deep);
-  opacity: 0;
-  transition: opacity 0.15s, transform 0.15s;
 }
 
 /* ── Tool page ── */
@@ -621,7 +530,7 @@ body {
   font-size: 11px;
   color: var(--ink-faint);
   border-top: 1px solid var(--border);
-  background: var(--bg);
+  background: var(--surface);
   letter-spacing: 0.05em;
 }
 .footer span { color: var(--pink-deep); }
@@ -653,8 +562,6 @@ body {
 .page-in { animation: fadeUp 0.3s ease; }
 
 @media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; padding: 40px 0; gap: 28px; }
-  .hero-left h2 { font-size: 36px; }
   .container { padding: 32px 20px 60px; }
   .header-badges { display: none; }
   .tool-grid { grid-template-columns: 1fr 1fr; }
